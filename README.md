@@ -4,7 +4,7 @@ Bem-vindo ao meu portfólio de projetos de análise de dados! Aqui você encontr
 
 ## Projetos
 
-1. **[Análise de Vendas](analise-vendas/README.md)**  
+1. **[Análise de Vendas](analise-vendas)**  
    Projeto de análise de dados de vendas de uma empresa de varejo, incluindo geração de dados sintéticos, limpeza, análise exploratória e criação de um dashboard interativo.
 
 2. **Projeto 2** *(em breve)*  
@@ -13,7 +13,6 @@ Bem-vindo ao meu portfólio de projetos de análise de dados! Aqui você encontr
 ## Como Navegar
 
 - Cada projeto tem seu próprio diretório com um `README.md` específico.
-- Consulte o `CHANGELOG.md` para ver as últimas atualizações.
 
 ## Tecnologias Utilizadas
 
