@@ -13,7 +13,7 @@ Este projeto tem como objetivo analisar dados de vendas de uma empresa de varejo
 
 1. Clone o repositório:
     ```bash
-    git clone https://github.com/seu-usuario/portfolio.git
+    git clone https://github.com/EuEsther/portfolio.git
     cd portfolio/analise-vendas
 
 2. Crie e ative o ambiente virtual:
