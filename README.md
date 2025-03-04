@@ -8,7 +8,7 @@ Bem-vindo ao meu portfólio de projetos de análise de dados! Aqui você encontr
    Projeto de análise de dados de vendas de uma empresa de varejo, incluindo geração de dados sintéticos, limpeza, análise exploratória e criação de um dashboard interativo.
 
 2. **Projeto 2** *(em breve)*  
-   Descrição do próximo projeto.
+
 
 ## Como Navegar
 
