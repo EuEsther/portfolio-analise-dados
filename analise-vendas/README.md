@@ -17,18 +17,23 @@ Este projeto tem como objetivo analisar dados de vendas de uma empresa de varejo
     cd portfolio/analise-vendas
 
 2. Crie e ative o ambiente virtual:
+    ```bash
     python -m venv venv
     source venv/bin/activate  # macOS/Linux
     venv\Scripts\activate    # Windows
 
 3. Instale as dependências:
+    ```bash
     pip install -r ../requirements.txt
 
 4. Execute o script de geração de dados:
+    ```bash
     python gerar_dados.py
 
 5. Execute o script de limpeza e transformação:
+    ```bash
     python limpeza_transformacao.py
-     
+
 6. Execute o dashboard interativo:
+    ```bash
     streamlit run dashboard.py
