@@ -9,15 +9,14 @@ Bem-vindo ao meu portfólio de projetos de análise de dados! Aqui você encontr
 
 2. **Projeto 2** *(em breve)*  
 
+## Tecnologias Utilizadas
+
+- **Python**: Linguagem de programação principal.
+- **Pandas**: Manipulação e análise de dados.
+- **Visualização de Dados**: Bibliotecas como Matplotlib, Seaborn e Plotly.
+- **Streamlit**: Criação de dashboards interativos.
+- **Git/GitHub**: Controle de versão e hospedagem do código.
 
 ## Como Navegar
 
 - Cada projeto tem seu próprio diretório com um `README.md` específico.
-
-
-## Tecnologias Utilizadas
-
-- Python
-- Pandas
-- Matplotlib/Seaborn
-- Streamlit
