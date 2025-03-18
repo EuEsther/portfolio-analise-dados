@@ -9,6 +9,15 @@ Este projeto tem como objetivo analisar dados de vendas de uma empresa de varejo
 - **Análise Exploratória**: Calcula métricas básicas e gera visualizações.
 - **Dashboard Interativo**: Permite filtrar dados e visualizar gráficos em tempo real.
 
+## Tecnologias Utilizadas
+
+- **Python**: Linguagem de programação principal.
+- **Pandas**: Manipulação e análise de dados.
+- **Faker**: Geração de dados sintéticos.
+- **Matplotlib/Seaborn**: Visualização de dados estáticos.
+- **Plotly**: Visualização de dados interativos.
+- **Streamlit**: Criação do dashboard interativo.
+
 ## Como Executar
 
 1. Clone o repositório:
