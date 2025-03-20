@@ -48,7 +48,7 @@ df_filtrado = df[
 
 # Exibir os dados filtrados
 st.subheader(
-    f"Dados Filtrados para {', '.join(produtos_selecionados)} no Mês {mes_selecionado}"
+    f"Dados Filtrados no Mês {mes_selecionado} para {', '.join(produtos_selecionados)}  "
 )
 st.write(df_filtrado)
 
