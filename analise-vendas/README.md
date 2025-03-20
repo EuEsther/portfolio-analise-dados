@@ -2,14 +2,14 @@
 
 Este projeto tem como objetivo analisar dados de vendas de uma empresa de varejo, utilizando técnicas de análise de dados e visualização. O projeto inclui a geração de um dataset sintético, limpeza e transformação dos dados, análise exploratória e a criação de um dashboard interativo.
 
-## Funcionalidades
+## ⚙️ Funcionalidades
 
 - **Geração de Dados Sintéticos**: Cria um dataset fictício de vendas.
 - **Limpeza e Transformação**: Remove dados duplicados, ajusta formatos e cria novas colunas.
 - **Análise Exploratória**: Calcula métricas básicas e gera visualizações.
 - **Dashboard Interativo**: Permite filtrar dados e visualizar gráficos em tempo real.
 
-## Tecnologias Utilizadas
+## 🛠️ Tecnologias Utilizadas
 
 - **Python**: Linguagem de programação principal.
 - **Pandas**: Manipulação e análise de dados.
@@ -18,7 +18,7 @@ Este projeto tem como objetivo analisar dados de vendas de uma empresa de varejo
 - **Plotly**: Visualização de dados interativos.
 - **Streamlit**: Criação do dashboard interativo.
 
-## Como Executar
+## 🚀 Como Executar
 
 1. Clone o repositório:
     ```bash
