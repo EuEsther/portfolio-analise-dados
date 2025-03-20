@@ -20,3 +20,7 @@ Bem-vindo ao meu portfólio de projetos de análise de dados! Aqui você encontr
 ### 📌Como Navegar 
 
 - Cada projeto tem seu próprio diretório com um `README.md` específico.
+
+### 📜 Licença
+
+Este projeto está licenciado sob a [MIT License](LICENSE). Consulte o arquivo `LICENSE` para mais detalhes.
