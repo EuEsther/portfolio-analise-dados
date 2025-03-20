@@ -17,9 +17,13 @@ Bem-vindo ao meu portfólio de projetos de análise de dados! Aqui você encontr
 - **Streamlit**: Criação de dashboards interativos.
 - **Git/GitHub**: Controle de versão e hospedagem do código.
 
+---
+
 ### 📌Como Navegar 
 
 - Cada projeto tem seu próprio diretório com um `README.md` específico.
+
+---
 
 ### 📜 Licença
 
