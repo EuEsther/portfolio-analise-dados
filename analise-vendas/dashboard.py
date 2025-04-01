@@ -2,107 +2,112 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import plotly.express as px
 
-# configurações da pagina
+# Configurações da página
 st.set_page_config(page_title="Dashboard de Vendas", layout="wide")
 
-# titulo do dashboard
+# Título do dashboard
 st.title("Dashboard de Análise de Vendas")
 
-# carregar o dataset limpo
+# Carregar o dataset limpo
 df = pd.read_csv("vendas_limpo.csv")
 
-# exibir o dataset
-st.subheader("Dados de Vendas")
-st.write(df)
+# Converter colunas para os tipos corretos
+df["Data"] = pd.to_datetime(df["Data"])
+df["Ano"] = df["Data"].dt.year
 
-# Filtros interativos
+# Filtros interativos na sidebar
 st.sidebar.header("Filtros")
 
-# Filtro de produtos (permite seleção múltipla)
+# Filtro de Produtos
 produtos = df["Produto"].unique()
 produtos_selecionados = st.sidebar.multiselect(
-    "Selecione um ou mais Produtos", produtos, default=produtos
+    "Selecione os Produtos", produtos, default=produtos
+)
+# Filtro de Ano
+anos = df["Ano"].unique()
+ano_selecionado = st.sidebar.selectbox("Selecione o Ano", anos)
+
+# Filtro de Mês
+meses = df["Mês"].unique()
+mes_selecionado = st.sidebar.selectbox("Selecione o Mês", meses)
+
+# Filtro de Intervalo de Quantidade
+min_quantidade = int(df["Quantidade"].min())
+max_quantidade = int(df["Quantidade"].max())
+quantidade_range = st.sidebar.slider(
+    "Selecione o intervalo de quantidade",
+    min_quantidade,
+    max_quantidade,
+    (min_quantidade, max_quantidade),
 )
 
-# Filtro de mês
-meses = df["Mês"].unique()
-mes_selecionado = st.sidebar.selectbox("Selecione um Mês", meses)
 
-# Converter a coluna 'Data' para o tipo datetime
-df["Data"] = pd.to_datetime(df["Data"])
-
-# Filtro de data
-st.sidebar.subheader("Filtro de Datas")
-data_inicio = st.sidebar.date_input("Data Inicial", df["Data"].min())
-data_fim = st.sidebar.date_input("Data Final", df["Data"].max())
-
-# Filtrar os dados
+# Aplicar todos os filtros
 df_filtrado = df[
-    (df["Produto"].isin(produtos_selecionados))  # Filtro de produtos
-    & (df["Mês"] == mes_selecionado)  # Filtro de mês
-    & (df["Data"] >= pd.to_datetime(data_inicio))  # Filtro de data inicial
-    & (df["Data"] <= pd.to_datetime(data_fim))  # Filtro de data final
+    (df["Produto"].isin(produtos_selecionados))
+    & (df["Ano"] == ano_selecionado)
+    & (df["Mês"] == mes_selecionado)
+    & (df["Quantidade"] >= quantidade_range[0])
+    & (df["Quantidade"] <= quantidade_range[1])
 ]
 
-# Exibir os dados filtrados
-st.subheader(
-    f"Dados Filtrados no Mês {mes_selecionado} para {', '.join(produtos_selecionados)}  "
-)
-st.write(df_filtrado)
-
-# cartoes com metricas relevantes
+# Métricas
 st.write("### Métricas Principais")
 col1, col2, col3, col4 = st.columns(4)
-with col1:
-    if not df_filtrado.empty:
-        total_vendas = df_filtrado["Total"].sum()
-        st.metric("Total de Vendas", f"R$ {total_vendas:,.2f}")
-    else:
-        st.metric("Total de Vendas", "R$ 0.00")
 
-with col2:
-    if not df_filtrado.empty:
-        media_vendas = df_filtrado["Total"].mean()
-        st.metric("Média de Vendas por Dia", f"R$ {media_vendas:,.2f}")
-    else:
-        st.metric("Média de Vendas por Dia", "R$ 0.00")
+metricas = {
+    "Total de Vendas": "R$ 0.00",
+    "Média de Vendas/dia": "R$ 0.00",
+    "Quantidade Vendida": "0 unidades",
+    "Produto Mais Vendido": "Nenhum",
+}
 
-with col3:
-    if not df_filtrado.empty:
-        quantidade_vendas = df_filtrado["Quantidade"].sum()
-        st.metric("Quantidade Total Vendida", f"{quantidade_vendas:,.2f} unidades")
-    else:
-        st.metric("Quantidade Total Vendida", "0.00 unidades")
+if not df_filtrado.empty:
+    metricas = {
+        "Total de Vendas": f"R$ {df_filtrado['Total'].sum():,.2f}",
+        "Média de Vendas/dia": f"R$ {df_filtrado['Total'].mean():,.2f}",
+        "Quantidade Vendida": f"{df_filtrado['Quantidade'].sum():,} unidades",
+        "Produto Mais Vendido": df_filtrado["Produto"].value_counts().idxmax(),
+    }
 
-with col4:
-    if not df_filtrado.empty:
-        produto_mais_vendido = df_filtrado["Produto"].value_counts().idxmax()
-        st.metric("Produto Mais Vendido", produto_mais_vendido)
-    else:
-        st.metric("Produto Mais Vendido", "Nenhum")
+for i, (k, v) in enumerate(metricas.items()):
+    with eval(f"col{i+1}"):
+        st.metric(k, v)
 
-# grafico de funil: Vendas por produto
+
+# Visualizações com verificações
+def exibir_grafico(fig, titulo):
+    if df_filtrado.empty:
+        st.warning(f"Não há dados para exibir no gráfico: {titulo}")
+        plt.close(fig)
+    else:
+        st.pyplot(fig)
+
+
+# Gráfico Barras
 st.write("### Vendas por Produto")
+fig1, ax1 = plt.subplots(figsize=(20, 8))
 if not df_filtrado.empty:
-    vendas_por_produto = df_filtrado.groupby("Produto")["Total"].sum().sort_values(ascending=False)
-    fig, ax = plt.subplots(figsize=(12, 6))
-    sns.barplot(x=vendas_por_produto.values, y =vendas_por_produto.index, palette="viridis", ax=ax)
-    plt.title("Vendas por Produto")
+    vendas_produto = df_filtrado.groupby('Produto')['Total'].sum().sort_values()
+    sns.barplot(x=vendas_produto.values, y=vendas_produto.index, palette="viridis", ax=ax1)
+    plt.title("Vendas por Produto (Filtradas)")
     plt.xlabel("Total de Vendas (R$)")
-    plt.ylabel("Produto")
-    st.pyplot(fig)
-else:
-    st.write("Nenhum dado disponível para exibir o gráfico de vendas por produto.")
+exibir_grafico(fig1, "Vendas por Produto")
 
-# grafico de linhas: Vendas ao longo do tempo
-st.write("### Vendas ao longo do Tempo")
+# Gráfico Evolução temporal
+st.write("### Vendas ao Longo do Tempo")
+fig2, ax2 = plt.subplots(figsize=(20, 6))
 if not df_filtrado.empty:
-    vendas_por_data = df_filtrado.groupby('Data')['Total'].sum()
-    fig, ax = plt.subplots(figsize=(12, 6))
-    sns.lineplot(x=vendas_por_data.index, y=vendas_por_data.values, marker="o" ,ax=ax)
+    evolucao = df_filtrado.groupby("Data")["Total"].sum()
+    sns.lineplot(x=evolucao.index, y=evolucao.values, marker="o", ax=ax2)
     plt.xticks(rotation=45)
-    st.pyplot(fig)
+    plt.title("Evolução das Vendas")
+exibir_grafico(fig2, "Evolução Temporal")
+
+# Mostrar dados filtrados
+st.write("### Tabela de Dados Filtrados")
+if df_filtrado.empty:
+    st.warning("Nenhum dado disponível para os filtros selecionados.")
 else:
-    st.write("Nenhum dado disponível para exibir o gráfico de vendas ao longo do tempo.")
+    st.write(df_filtrado)
