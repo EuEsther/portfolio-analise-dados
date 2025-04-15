@@ -4,10 +4,10 @@ from datetime import datetime
 import random
 
 # configurações
-NUM_REGISTROS = 1000 #numero do registro (vendas) a serem gerados
-PRODUTOS = ["Camiseta", "Calça", "Tênis", "Boné", "Mochila"]
+NUM_REGISTROS = 3000 #numero do registro (vendas) a serem gerados
+PRODUTOS = ["Camiseta", "Calça", "Tênis", "Boné", "Mochila", "Sapato"]
 DATA_INICIO = datetime.strptime("2023-01-01", "%Y-%m-%d").date()
-DATA_FIM = datetime.strptime("2023-12-31", "%Y-%m-%d").date()
+DATA_FIM = datetime.strptime("2025-12-31", "%Y-%m-%d").date()
 
 # inicializador Faker
 fake = Faker('pt-BR') # configurar para dados em Portugues
