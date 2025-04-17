@@ -18,10 +18,7 @@ print("\nNumero de linhas duplicadas:", df.duplicated().sum())
 df.drop_duplicates(inplace=True)
 
 # ajustar o tipo da coluna 'Data
-df["Data"] = pd.to_datetime(df["Data"])
-
-# criar uma nova coluna 'Mês' para análise de sazonalidade
-df['Mês'] = df['Data'].dt.month
+df["Data"] = pd.to_datetime(df["Data"]).dt.date
 
 # criar uma nova coluna 'Ano'
 df["Ano"] = pd.to_datetime(df["Data"]).dt.year

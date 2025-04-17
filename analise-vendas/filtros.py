@@ -17,14 +17,6 @@ def resetar_filtro_ano(df, filtros_default):
     )
 
 
-def resetar_filtro_mes(df, filtros_default):
-    meses_validos = df["Mês"].unique().tolist()
-    mes_default = filtros_default["mes"]
-    st.session_state["filtro_mes"] = (
-        mes_default if mes_default in meses_validos else meses_validos[0]
-    )
-
-
 def resetar_filtro_quantidade(df, filtros_default):
     qtd_min, qtd_max = int(df["Quantidade"].min()), int(df["Quantidade"].max())
     q1, q2 = filtros_default["quantidade"]
@@ -38,7 +30,6 @@ def resetar_filtros(df):
     filtros_default = st.session_state.filtros_default
     resetar_filtro_produto(df, filtros_default)
     resetar_filtro_ano(df, filtros_default)
-    resetar_filtro_mes(df, filtros_default)
     resetar_filtro_quantidade(df, filtros_default)
 
 
@@ -56,9 +47,6 @@ def exibir_filtros(df):
         "Selecione o Ano", sorted(df["Ano"].unique()), key="filtro_ano"
     )
 
-    mes = st.sidebar.selectbox(
-        "Selecione o Mês", sorted(df["Mês"].unique()), key="filtro_mes"
-    )
 
     quantidade = st.sidebar.slider(
         "Intervalo de Quantidade",
@@ -69,4 +57,4 @@ def exibir_filtros(df):
     )
     
 
-    return produtos, ano, mes, quantidade
+    return produtos, ano, quantidade
