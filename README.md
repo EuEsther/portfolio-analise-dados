@@ -7,7 +7,9 @@ Bem-vindo ao meu portfólio de projetos de análise de dados! Aqui você encontr
 1. **[Análise de Vendas](analise-vendas/README.md)**  
    Projeto de análise de dados de vendas de uma empresa de varejo, incluindo geração de dados sintéticos, limpeza, análise exploratória e criação de um dashboard interativo.
 
-2. **Projeto 2** *(em breve)* 
+2. **[Análise de Streaming](streaming/README.md)**
+   <br>
+   Projeto de análise de dados de uma plataforma de streaming, incluindo criação de uma base de dados fictícia, consultas SQL, análise exploratória e identificação de padrões no perfil e comportamento dos clientes.
 
 ## 🛠️ Tecnologias Utilizadas
 
